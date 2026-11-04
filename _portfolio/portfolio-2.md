@@ -1,6 +1,6 @@
 ---
 title: "Design and development of a news bulletin automatic generation system based on large models"
-excerpt: "The system automatically crawls web pages related to the power grid every day, and after extraction and filtering by a large model, generates a daily HTML briefing report, which is sent out on DingTalk.<br/><img src='/sooophia520/images/City Harbor.png'>"
+excerpt: "The system automatically crawls web pages related to the power grid every day, and after extraction and filtering by a large model, generates a daily HTML briefing report, which is sent out on DingTalk.<br/><img src='/sooophia520/images/generation system.png'>"
 collection: portfolio
 ---
 
