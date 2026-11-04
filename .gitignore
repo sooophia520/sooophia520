@@ -26,5 +26,6 @@ package-lock.json
 __pycache__/
 *.pyc
 
-# Ignore the main.min.js since it should be built as part of jekyll-build.yml
-assets/js/main.min.js
+# assets/js/main.min.js is committed on purpose. GitHub's built-in Pages
+# build does not run the uglify step, so the file has to be in the repo
+# or the live site 404s it. The Actions workflow still regenerates it.
