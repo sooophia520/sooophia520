@@ -1,13 +1,14 @@
 ---
 permalink: /
-title: "关于我"
+title: "About Me"
 author_profile: true
 redirect_from:
   - /about/
   - /about.html
 ---
 
-你好，我是傅姚葭。这个网站用来放我的论文、报告、教学、项目和简历。
+你好，我是傅姚葭。这个网站用来放我的项目和简历。
+Hello, My name is Fu Yaojia. This website is used to store my project and CV.
 
 ## 目录
 
