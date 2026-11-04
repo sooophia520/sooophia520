@@ -26,7 +26,7 @@ author:
   avatar           : "wps_pic_0.jpeg" # filename inside /images/, or a full https URL
   name             : "Fu Yaojia"
   pronouns         : # example: "she/her"  
-  bio              : "个人作品集"
+  bio              : "personal portfolio"
   location         : # city, country
   employer         : # university or company
   uri              : "https://sooophia520.github.io/sooophia520/"

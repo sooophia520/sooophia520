@@ -318,13 +318,23 @@
     display: flex;
     align-items: flex-start;
     white-space: normal;
-    margin-bottom: 8px;
-    font-size: $type-size-5;
-    line-height: 1.45;
+    margin-bottom: 0.7em;
+    font-size: $type-size-6;
+    line-height: 1.35;
+  }
+
+  li.author__info i {
+    flex: none;
+    width: 1.15em;
+    margin-top: 0.12em;
+    margin-right: 0.55em;
+    padding-right: 0;
+    text-align: center;
   }
 
   li.author__info span {
     min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   a {

@@ -37,10 +37,10 @@
         <li class="author__desktop"><i class="fas fa-fw fa-building-columns icon-pad-right" aria-hidden="true"></i>{{ author.employer }}</li>
       {% endif %}
       {% if author.uri %}
-        <li class="author__info"><i class="fas fa-fw fa-link icon-pad-right" aria-hidden="true"></i><span>{%- assign uri_body = author.uri | remove_first: "https://" | remove_first: "http://" -%}{%- assign uri_host = uri_body | split: "/" | first -%}{%- assign uri_path = uri_body | remove_first: uri_host -%}{%- assign uri_name = uri_host | split: "." | first -%}{%- assign uri_domain = uri_host | remove_first: uri_name | remove_first: "." -%}https://<wbr>{{ uri_name }}{% if uri_domain != "" %}.<wbr>{{ uri_domain }}{% endif %}{% if uri_path != "" %}<wbr>{{ uri_path }}{% endif %}</span></li>
+        <li class="author__info"><i class="fas fa-fw fa-link icon-pad-right" aria-hidden="true"></i><span>{%- assign uri_body = author.uri | remove_first: "https://" | remove_first: "http://" -%}{%- assign uri_host = uri_body | split: "/" | first -%}{%- assign uri_path = uri_body | remove_first: uri_host -%}{%- assign uri_name = uri_host | split: "." | first -%}{%- assign uri_domain = uri_host | remove_first: uri_name | remove_first: "." -%}https://{{ uri_name }}{%- if uri_domain != "" -%}<br>.{{ uri_domain }}{%- endif -%}{%- if uri_path != "" -%}<br>{{ uri_path }}{%- endif -%}</span></li>
       {% endif %}
       {% if author.email %}
-        <li class="author__info"><i class="fas fa-fw fa-envelope icon-pad-right" aria-hidden="true"></i><span>{%- assign email_parts = author.email | split: "@" -%}{{ email_parts[0] }}@<wbr>{{ email_parts[1] }}</span></li>
+        <li class="author__info"><i class="fas fa-fw fa-envelope icon-pad-right" aria-hidden="true"></i><span>{%- assign email_parts = author.email | split: "@" -%}{{ email_parts[0] }}<br>@{{ email_parts[1] }}</span></li>
       {% endif %}
 
       <!-- Font Awesome and Academicons icons / Academic websites -->
