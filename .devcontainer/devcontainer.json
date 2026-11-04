@@ -12,5 +12,5 @@
     "workspaceFolder": "/usr/src/app",
     "remoteUser": "vscode",
     "forwardPorts": [4000], // Add port forwarding
-    "postCreateCommand": "jekyll serve -H 0.0.0.0 -w --config _config.yml,_config_docker.yml"
+    "postCreateCommand": "bundle check"
 }

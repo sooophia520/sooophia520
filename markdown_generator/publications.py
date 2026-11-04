@@ -15,8 +15,8 @@ import csv
 import os
 import sys
 
-# Flag to indicate an error occurred
-EXIT_ERROR = 0
+# Flag to indicate an error occurred. Must be non-zero so callers can detect failure.
+EXIT_ERROR = 1
 
 # The expected layout of the CSV / TSV file
 HEADER_LEGACY  = ['pub_date', 'title', 'venue', 'excerpt', 'citation', 'url_slug', 'paper_url', 'slides_url']
@@ -41,10 +41,10 @@ def create_md(lines: list, layout: list):
         html_filename = str(item[layout.index('pub_date')]) + "-" + item[layout.index('url_slug')]
         
         # Parse the YAML variables
-        md = f"---\ntitle: \"{item[layout.index('title')]}\"\n"
+        md = f"---\ntitle: \"{yaml_double_quote(item[layout.index('title')])}\"\n"
         md += "collection: publications"
         if len(layout) == len(HEADER_UPDATED):
-            md += f"\ncategory: {item[layout.index('category')]}"
+            md += f"\ncategory: \"{yaml_double_quote(item[layout.index('category')])}\""
         else:
             md += "\ncategory: manuscripts"
         md += f"\npermalink: /publication/{html_filename}"
@@ -64,14 +64,21 @@ def create_md(lines: list, layout: list):
             md += f"\n{html_escape(item[layout.index('excerpt')])}\n"
         md += f"\nRecommended citation: {item[layout.index('citation')]}"
         
-        # Write the file
-        md_filename = os.path.join("../_publications/", os.path.basename(md_filename))
+        # Write next to this script so the command works from any working directory.
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        out_dir = os.path.join(script_dir, "..", "_publications")
+        os.makedirs(out_dir, exist_ok=True)
+        md_filename = os.path.join(out_dir, os.path.basename(md_filename))
         with open(md_filename, 'w') as f:
             f.write(md)
 
 def html_escape(text):
     """Produce entities within text."""
     return "".join(HTML_ESCAPE_TABLE.get(c,c) for c in text)
+
+def yaml_double_quote(text):
+    """Escape a value that will be wrapped in double quotes in YAML front matter."""
+    return str(text).replace("\\", "\\\\").replace('"', '\\"').replace("\r", " ").replace("\n", " ")
 
 def read(filename: str) -> tuple[list, list]:
     '''Read the contents of the file, check the header and return the parsed line along with the file type.'''

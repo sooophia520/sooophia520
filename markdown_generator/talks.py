@@ -28,6 +28,11 @@ def html_escape(text):
         return ""
 
 
+def yaml_double_quote(text):
+    """Escape a value that will be wrapped in double quotes in YAML front matter."""
+    return str(text).replace("\\", "\\\\").replace('"', '\\"').replace("\r", " ").replace("\n", " ")
+
+
 def main(input_file, output_dir=None):
     if output_dir is None:
         script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -58,18 +63,18 @@ def main(input_file, output_dir=None):
             md_path = os.path.join(output_dir, md_filename)
 
             md = "---\n"
-            md += "title: \"" + title + "\"\n"
+            md += 'title: "' + yaml_double_quote(title) + '"\n'
             md += "collection: talks\n"
             if len(talk_type) > 3:
-                md += 'type: "' + talk_type + '"\n'
+                md += 'type: "' + yaml_double_quote(talk_type) + '"\n'
             else:
                 md += 'type: "Talk"\n'
             md += "permalink: /talks/" + date + "-" + url_slug + "\n"
             if venue:
-                md += 'venue: "' + venue + '"\n'
+                md += 'venue: "' + yaml_double_quote(venue) + '"\n'
             md += "date: " + date + "\n"
             if location:
-                md += 'location: "' + location + '"\n'
+                md += 'location: "' + yaml_double_quote(location) + '"\n'
             md += "---\n"
 
             if talk_url:

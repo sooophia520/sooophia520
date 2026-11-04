@@ -1,5 +1,16 @@
-{% if site.url %}
-  {% assign base_path = site.url | append: site.baseurl %}
+{% comment %}
+  Asset and in-site links use this prefix.
+  Production (JEKYLL_ENV=production, including GitHub Actions) keeps an absolute
+  origin so social cards and feeds point at the public site.
+  Local preview uses site.baseurl only. Otherwise every stylesheet, script, and
+  image is requested from site.url, which 404s until that host is actually published.
+{% endcomment %}
+{% if jekyll.environment == "production" %}
+  {% if site.url %}
+    {% assign base_path = site.url | append: site.baseurl %}
+  {% else %}
+    {% assign base_path = site.github.url %}
+  {% endif %}
 {% else %}
-  {% assign base_path = site.github.url %}
+  {% assign base_path = site.baseurl %}
 {% endif %}

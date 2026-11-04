@@ -19,6 +19,7 @@
 from pybtex.database.input import bibtex
 import pybtex.database.input.bibtex 
 from time import strptime
+from urllib.parse import quote_plus
 import string
 import html
 import os
@@ -54,7 +55,54 @@ def html_escape(text):
     return "".join(html_escape_table.get(c,c) for c in text)
 
 
-for pubsource in publist:
+def parse_month(raw):
+    """Return a zero-padded month. Accepts 1-12 or an English month name."""
+    text = str(raw).strip()
+    if text.isdigit():
+        month = int(text)
+        if 1 <= month <= 12:
+            return f"{month:02d}"
+        return "01"
+    try:
+        return f"{strptime(text[:3], '%b').tm_mon:02d}"
+    except ValueError:
+        return "01"
+
+
+def parse_day(raw):
+    """Return a zero-padded day, or 01 when the field is not a real day."""
+    try:
+        day = int(str(raw).strip())
+    except ValueError:
+        return "01"
+    if 1 <= day <= 31:
+        return f"{day:02d}"
+    return "01"
+
+
+def slugify(title):
+    """Build a URL slug that keeps Unicode letters, so Chinese titles are not dropped."""
+    cleaned = title.replace("{", "").replace("}", "").replace("\\", "")
+    cleaned = re.sub(r"\s+", "-", cleaned.strip())
+    cleaned = re.sub(r"[^\w\-]", "", cleaned, flags=re.UNICODE)
+    cleaned = re.sub(r"-{2,}", "-", cleaned).strip("-")
+    return cleaned or "paper"
+
+
+# Journal articles and conference papers are the category keys in _config.yml.
+# A publication with no category is omitted from the publications page.
+CATEGORY_FOR_SOURCE = {
+    "journal": "manuscripts",
+    "proceeding": "conferences",
+}
+
+
+def main():
+  script_dir = os.path.dirname(os.path.abspath(__file__))
+  out_dir = os.path.join(script_dir, "..", "_publications")
+  os.makedirs(out_dir, exist_ok=True)
+
+  for pubsource in publist:
     parser = bibtex.Parser()
     bibdata = parser.parse_file(publist[pubsource]["file"])
 
@@ -71,26 +119,18 @@ for pubsource in publist:
             pub_year = f'{b["year"]}'
 
             #todo: this hack for month and day needs some cleanup
-            if "month" in b.keys(): 
-                if(len(b["month"])<3):
-                    pub_month = "0"+b["month"]
-                    pub_month = pub_month[-2:]
-                elif(b["month"] not in range(12)):
-                    tmnth = strptime(b["month"][:3],'%b').tm_mon   
-                    pub_month = "{:02d}".format(tmnth) 
-                else:
-                    pub_month = str(b["month"])
-            if "day" in b.keys(): 
-                pub_day = str(b["day"])
+            if "month" in b.keys():
+                pub_month = parse_month(b["month"])
+            if "day" in b.keys():
+                pub_day = parse_day(b["day"])
 
                 
             pub_date = pub_year+"-"+pub_month+"-"+pub_day
             
             #strip out {} as needed (some bibtex entries that maintain formatting)
-            clean_title = b["title"].replace("{", "").replace("}","").replace("\\","").replace(" ","-")    
+            clean_title = b["title"].replace("{", "").replace("}","").replace("\\","")
 
-            url_slug = re.sub("\\[.*\\]|[^a-zA-Z0-9_-]", "", clean_title)
-            url_slug = url_slug.replace("--","-")
+            url_slug = slugify(clean_title)
 
             md_filename = (str(pub_date) + "-" + url_slug + ".md").replace("--","-")
             html_filename = (str(pub_date) + "-" + url_slug).replace("--","-")
@@ -116,6 +156,8 @@ for pubsource in publist:
             md = "---\ntitle: \""   + html_escape(b["title"].replace("{", "").replace("}","").replace("\\","")) + '"\n'
             
             md += """collection: """ +  publist[pubsource]["collection"]["name"]
+
+            md += "\ncategory: " + CATEGORY_FOR_SOURCE.get(pubsource, "manuscripts")
 
             md += """\npermalink: """ + publist[pubsource]["collection"]["permalink"]  + html_filename
             
@@ -147,14 +189,18 @@ for pubsource in publist:
             if url:
                 md += "\n[Access paper here](" + b["url"] + "){:target=\"_blank\"}\n" 
             else:
-                md += "\nUse [Google Scholar](https://scholar.google.com/scholar?q="+html.escape(clean_title.replace("-","+"))+"){:target=\"_blank\"} for full citation"
+                md += "\nUse [Google Scholar](https://scholar.google.com/scholar?q="+quote_plus(clean_title)+"){:target=\"_blank\"} for full citation"
 
             md_filename = os.path.basename(md_filename)
 
-            with open("../_publications/" + md_filename, 'w', encoding="utf-8") as f:
+            with open(os.path.join(out_dir, md_filename), 'w', encoding="utf-8") as f:
                 f.write(md)
             print(f'SUCCESSFULLY PARSED {bib_id}: \"', b["title"][:60],"..."*(len(b['title'])>60),"\"")
         # field may not exist for a reference
         except KeyError as e:
             print(f'WARNING Missing Expected Field {e} from entry {bib_id}: \"', b["title"][:30],"..."*(len(b['title'])>30),"\"")
             continue
+
+
+if __name__ == "__main__":
+    main()

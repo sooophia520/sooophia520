@@ -1,3 +1,18 @@
+# 傅姚葭的个人作品集
+
+这是基于 Academic Pages 的个人站点。本地预览：
+
+```bash
+bundle config set --local path 'vendor/bundle'
+bundle install
+npx --yes uglify-js@3.19.3 assets/js/plugins/jquery.greedy-navigation.js assets/js/_main.js assets/js/theme.js -c -m -o assets/js/main.min.js
+bundle exec jekyll serve -H 0.0.0.0 -p 4000
+```
+
+日常开发时，样式、脚本和图片使用相对路径，不会去请求还没发布的线上地址。`JEKYLL_ENV=production`（GitHub Actions 部署）才会使用 `_config.yml` 里的绝对网址。`docker compose up` 会在 4000 端口直接把站点跑起来。
+
+---
+
 # Academic Pages
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 

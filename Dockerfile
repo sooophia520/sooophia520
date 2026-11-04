@@ -31,5 +31,6 @@ RUN gem install connection_pool:2.5.0
 RUN gem install bundler:2.3.26
 RUN bundle install
 
-# Command to serve the Jekyll site
-CMD ["jekyll", "serve", "-H", "0.0.0.0", "-w", "--config", "_config.yml,_config_docker.yml"]
+# Command to serve the Jekyll site. `bundle exec` uses the gems installed above;
+# a bare `jekyll` is not on PATH for the non-root user.
+CMD ["bundle", "exec", "jekyll", "serve", "-H", "0.0.0.0", "-w", "--force_polling", "--config", "_config.yml,_config_docker.yml"]

@@ -12,7 +12,7 @@ site_theme               : "default" # The available themes options are "default
 title                    : "傅姚葭的作品集"
 title_separator          : "-"
 name                     : &name "傅姚葭"
-description              : &description "Your Name's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
+description              : &description "傅姚葭的个人作品集"   # Used when a page does not set its own description
 url                      : "https://sooophia520.github.io" # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -23,13 +23,13 @@ repository               : "sooophia520/sooophia520.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "/images/wps_pic_0.jpeg"
+  avatar           : "wps_pic_0.jpeg" # filename inside /images/, or a full https URL
   name             : "傅姚葭"
   pronouns         : # example: "she/her"  
-  bio              : "简介"
-  location         : "Earth"
-  employer         : "Red Brick University"
-  uri              : "https://sooohia520.github.io"  # URL
+  bio              : "个人作品集"
+  location         : # city, country
+  employer         : # university or company
+  uri              : "https://sooophia520.github.io"
   email            : "sooophia520@gmail.com" 
 
   # Academic websites
@@ -38,10 +38,10 @@ author:
   googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : "https://orcid.org/yourorcidurl"
+  orcid            : # URL, for example https://orcid.org/0000-0000-0000-0000
   semantic         : # URL
   ssrn             : # URL
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+  pubmed           : # URL
   researchgate     : # URL
   scopus           : # URL
   zotero           : # URL
@@ -57,7 +57,7 @@ author:
 
   # Social media
   artstation       : # Username
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
+  bluesky          : # username only, not the bsky.app domain
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
@@ -110,7 +110,7 @@ comments:
     colorscheme          : # "light" (default), "dark"
 staticman:
   allowedFields          : ['name', 'email', 'url', 'message']
-  branch                 : "gh-pages" # "master", "gh-pages"
+  branch                 : "master" # branch Staticman should commit comments to
   commitMessage          : "New comment."
   filename               : comment-{@timestamp}
   format                 : "yml"
@@ -155,7 +155,7 @@ social:
 
 # Analytics
 analytics:
-  provider               :  "false" # false (default), "google", "google-universal", "google-analytics-4", "custom"
+  provider               : false # false (default), "google", "google-universal", "google-analytics-4", "custom"
   google:
     tracking_id          :
 
@@ -281,7 +281,7 @@ defaults:
       layout: single
       author_profile: true
       share: true
-      comment: true
+      comments: true
   # _talks
   - scope:
       path: ""

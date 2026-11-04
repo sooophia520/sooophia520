@@ -12,7 +12,9 @@ jobs:
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
-    if: "contains(github.event.pull_request.body, 'by deleting this comment block') || github.event.pull_request.body == ''"
+    # This guard belongs to the Academic Pages template repository. On a personal
+    # site it closed real pull requests that still contained the PR template text.
+    if: "github.repository == 'academicpages/academicpages.github.io' && (contains(github.event.pull_request.body, 'by deleting this comment block') || github.event.pull_request.body == '')"
     steps:
       - uses: actions-ecosystem/action-add-labels@v1
         with:
