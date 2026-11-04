@@ -9,9 +9,9 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "傅姚葭的作品集"
+title                    : "Fu Yaojia's site"
 title_separator          : "-"
-name                     : &name "傅姚葭"
+name                     : &name "Fu Yaojia"
 description              : &description "傅姚葭的个人作品集"   # Used when a page does not set its own description
 url                      : "https://sooophia520.github.io" # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
@@ -24,18 +24,18 @@ repository               : "sooophia520/sooophia520"
 author:
   # Biographic information
   avatar           : "wps_pic_0.jpeg" # filename inside /images/, or a full https URL
-  name             : "傅姚葭"
+  name             : "Fu Yaojia"
   pronouns         : # example: "she/her"  
   bio              : "个人作品集"
   location         : # city, country
   employer         : # university or company
-  uri              : "https://sooophia520.github.io/sooophia520"
+  uri              : "https://sooophia520.github.io/sooophia520/"
   email            : "sooophia520@gmail.com" 
 
   # Academic websites
   academia         : # URL
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+  googlescholar    : # URL
   inspire-hep      : # URL
   impactstory      : # URL
   orcid            : # URL, for example https://orcid.org/0000-0000-0000-0000

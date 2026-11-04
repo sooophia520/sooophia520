@@ -314,6 +314,19 @@
     white-space: nowrap;
   }
 
+  li.author__info {
+    display: flex;
+    align-items: flex-start;
+    white-space: normal;
+    margin-bottom: 8px;
+    font-size: $type-size-5;
+    line-height: 1.45;
+  }
+
+  li.author__info span {
+    min-width: 0;
+  }
+
   a {
     display: block;
     margin-bottom: 5px;
