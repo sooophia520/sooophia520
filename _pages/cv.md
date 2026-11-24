@@ -22,16 +22,16 @@ Work experience
 
 * November 2025 - February 2026: Research Assistant
   * Institute of Digital Economy, Shanghai University of Finance and Economics (sealed)
-  * Duties included: • Assist supervisors in literature collection, data sorting and information summarization. 
+  * Duties included: • Assist supervisors in literature collection, data sorting and information summarization.   
                      • Sort out relevant industry information and drafting preliminary versions of economic research reports.  
   * Supervisor: Professor Yanping Hu
 
 * February - June 2026: Project Intern
   * Zhejiang Tiaoyue Digital Intelligence Technology Co., Ltd. (sealed)
-  * Duties included: • Collected and curated sample materials for industry brief news.
-                     • Researched technical documentation on large language models (LLMs).
-                     • Gathered and consolidated business requirements.
-                     • Assisted the team in defining the system's functional specifications.
+  * Duties included: • Collected and curated sample materials for industry brief news.  
+                     • Researched technical documentation on large language models (LLMs).  
+                     • Gathered and consolidated business requirements.  
+                     • Assisted the team in defining the system's functional specifications.  
                      • Organised test materials and proofread project documents.
   * Supervisor: Lecturer Yun Zhou
  
