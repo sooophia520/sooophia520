@@ -20,4 +20,4 @@ City Harbor used to run its leasing pipeline on spreadsheets and WeChat groups. 
 After launch, contract expiry reminders moved from manual checking to automatic
 notifications, and the status of every lead became visible at any time.
 
-![City Harbor operations dashboard](/soophia520/images/City Harbor.png)
+![City Harbor operations dashboard](/sooophia520/images/City Harbor.png)
